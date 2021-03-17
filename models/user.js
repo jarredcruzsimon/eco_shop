@@ -1,0 +1,71 @@
+const mongoose = require('mongoose')
+
+//used for passwords
+const crypto = require('crypto')
+
+const {v1: uuidv1} = require('uuid')
+
+
+//creating a new schema within Mongoose. Trim means that any space at the start or end will be trimmed off. 
+//password will be stored using a virtual filed (we will store the hash/ not the password)
+const userSchema = new mongoose.Schema({
+    name:{
+        type: String,
+        trim: true,
+        require: true,
+        maxlength: 32
+    },
+    email:{
+        type: String,
+        trim: true,
+        require: true,
+        maxlength: 32,
+        unique: true
+    },
+    hashed_password:{
+        type: String,
+        require: true,
+
+    },
+    about:{
+        type: String,
+        trim: true,
+
+    },
+    salt:String,
+    role:{
+        type:Number,
+        default:0
+    },
+    history:{
+        type: Array,
+        default:[]
+    }
+},{timestamps:true})
+
+//virtual filed
+userSchema.virtual('password')
+.set(function(password){
+    this._password = password
+    this.salt = uuidv1()
+    this.hashed_password = this.encryptPassword(password)
+})
+.get(function(){
+    return this._password
+})
+
+userSchema.methods ={
+    encryptPassword: function(password){
+        if (!password) return ''
+        try{
+            return crypto.createHmac('sha1',this.salt)
+                         .update(password)
+                         .digest('hex')
+        }
+        catch(err){
+            return ''
+        }
+    }
+}
+
+module.exports = mongoose.model("User", userSchema)
