@@ -3,11 +3,10 @@ const express = require('express')
 //import mongoose
 const mongoose =  require('mongoose')
 
-//import user router
-const userRoutes = require('./routes/user.js')
 
+// no need to import bodyparser is built into express
 //import body-parser
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 
 //import cookie-parser
 const cookieParser = require('cookie-parser')
@@ -18,6 +17,8 @@ const morgan = require('morgan')
 //import express validator
 const expressValidator = require('express-validator')
 
+//import user router
+const userRoutes = require("./routes/user.js")
 
 const app = express()
 
@@ -37,14 +38,15 @@ mongoose.connect(
       useUnifiedTopology: true 
 })
 .then(()=> console.log('DB Connected'))
+.catch((err)=>{console.log(err)})
 
 
 //---------------------------------------------------------------------
 //middlewares
-
+// app.use(bodyParser.json())
+app.use(express.json())
 app.use(morgan('dev'))
-app.use(bodyParser.json())
-app.use(cookieParser)
+app.use(cookieParser())
 app.use(expressValidator())
 
 //---------------------------------------------------------------------
