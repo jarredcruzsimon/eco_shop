@@ -1,3 +1,8 @@
+//---------------------------------------------------------------------
+//load env variables
+require('dotenv').config()
+
+//---------------------------------------------------------------------
 const express = require('express')
 
 //import mongoose
@@ -17,17 +22,14 @@ const morgan = require('morgan')
 //import express validator
 const expressValidator = require('express-validator')
 
+//import auth router
+const authRoutes = require("./routes/auth.js")
+
 //import user router
 const userRoutes = require("./routes/user.js")
 
+
 const app = express()
-
-
-
-
-//---------------------------------------------------------------------
-//load env variables
-require('dotenv').config()
 
 
 //---------------------------------------------------------------------
@@ -44,6 +46,7 @@ mongoose.connect(
 //---------------------------------------------------------------------
 //middlewares
 // app.use(bodyParser.json())
+
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())
@@ -51,6 +54,7 @@ app.use(expressValidator())
 
 //---------------------------------------------------------------------
 //Routes
+app.use("/api",authRoutes)
 app.use("/api",userRoutes)
 
 
