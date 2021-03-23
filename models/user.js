@@ -18,13 +18,13 @@ const userSchema = new mongoose.Schema({
     email:{
         type: String,
         trim: true,
-        require: true,
+        required: true,
         maxlength: 32,
         unique: true
     },
     hashed_password:{
         type: String,
-        require: true,
+        required: true,
 
     },
     about:{

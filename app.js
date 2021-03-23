@@ -28,6 +28,11 @@ const authRoutes = require("./routes/auth.js")
 //import user router
 const userRoutes = require("./routes/user.js")
 
+//import category router
+const categoryRoutes = require("./routes/category.js")
+
+//import product router
+const productRoutes = require("./routes/product.js")
 
 const app = express()
 
@@ -56,6 +61,8 @@ app.use(expressValidator())
 //Routes
 app.use("/api",authRoutes)
 app.use("/api",userRoutes)
+app.use("/api",categoryRoutes)
+app.use("/api",productRoutes)
 
 
 //---------------------------------------------------------------------
