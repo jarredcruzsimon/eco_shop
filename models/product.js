@@ -26,6 +26,10 @@ const productSchema = new mongoose.Schema({
         ref: "Category",// this is how to link the category schema 
         required: true    
     },
+    sold:{
+        type: Number,
+        default: 0
+    },
     quantity:{
         type: Number
     },
