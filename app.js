@@ -16,6 +16,9 @@ const mongoose =  require('mongoose')
 //import cookie-parser
 const cookieParser = require('cookie-parser')
 
+//import CORS
+const cors = require('cors')
+
 //import morgan
 const morgan = require('morgan')
 
@@ -56,6 +59,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(expressValidator())
+app.use(cors())
 
 //---------------------------------------------------------------------
 //Routes
