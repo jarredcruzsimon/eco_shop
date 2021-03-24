@@ -22,10 +22,19 @@ const Menu = (props) =>{
                     <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link>
                 </li>
 
-                {/* Home */}
-                <li className="nav-item">
-                    <Link className="nav-link" style={isActive(history,'/dashboard')} to="/dashboard">Dashboard</Link>
+                {isAuthenticated() && isAuthenticated().user.role === 0 && (
+                 <li className="nav-item">
+                    {/* Dashboard */}
+                        <Link className="nav-link" style={isActive(history,'/user/dashboard')} to="/user/dashboard">Dashboard</Link>
+                    </li>
+                )}
+
+                {isAuthenticated() && isAuthenticated().user.role === 1 && (
+                 <li className="nav-item">
+                 {/* Dashboard */}
+                    <Link className="nav-link" style={isActive(history,'/admin/dashboard')} to="/admin/dashboard">Dashboard</Link>
                 </li>
+                )}
 
                 {/* if the user is not signed in the !isAuthenticate will be true 
                 and the second condition will show the signin and signout buttons */}

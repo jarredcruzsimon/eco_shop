@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import Layout from '../core/Layout.js'
-import { signin, authenticate } from '../auth/index.js'
+import { signin, authenticate, isAuthenticated } from '../auth/index.js'
 
 
 
@@ -16,6 +16,7 @@ const Signin = () =>{
     })
 
     const {email, password, error, loading, redirectToReferrer } = values
+    const {user} = isAuthenticated()
 
     const handleChange = name => event =>{
         //in the setvalues , [name] is dynamic meaning it will capture name, email, and/or password
@@ -74,6 +75,13 @@ const Signin = () =>{
 
     const redirectUser = () =>{
         if(redirectToReferrer){
+            if (user && user.role === 1){
+                return <Redirect to="/admin/dashboard" />
+            }else{
+                return <Redirect to="/user/dashboard" />
+            }
+        }
+        if(isAuthenticated()){
             return <Redirect to="/" />
         }
     }
