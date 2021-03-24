@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import {Link, withRouter} from 'react-router-dom'
-import { signout, isAuthenticate } from '../auth/index.js';
+import { signout, isAuthenticated } from '../auth/index.js';
 
 //highlights the active link
 const isActive = (history, path)=>{
@@ -22,9 +22,14 @@ const Menu = (props) =>{
                     <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link>
                 </li>
 
+                {/* Home */}
+                <li className="nav-item">
+                    <Link className="nav-link" style={isActive(history,'/dashboard')} to="/dashboard">Dashboard</Link>
+                </li>
+
                 {/* if the user is not signed in the !isAuthenticate will be true 
                 and the second condition will show the signin and signout buttons */}
-                {!isAuthenticate() && (
+                {!isAuthenticated() && (
                     <Fragment>
                         {/* Fragment can be used to wrap multiple elements without causeing a line break*/}
                         {/* Signup */}
@@ -39,7 +44,7 @@ const Menu = (props) =>{
                     </Fragment>
                 )}
 
-                {isAuthenticate() && (
+                {isAuthenticated() && (
                     <li className="nav-item">
                         {/* Signout */}
                         <span className="nav-link" style={{cursor: 'pointer', color: '#ffffff'}} 

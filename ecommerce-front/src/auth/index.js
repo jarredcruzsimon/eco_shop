@@ -73,7 +73,7 @@ import { API } from '../config.js'
         }
     }
 
-    const isAuthenticate = ()=>{
+    const isAuthenticated = ()=>{
         if(typeof window === 'undefined'){
             return false
         }
@@ -91,5 +91,5 @@ export {
     signin,
     authenticate,
     signout,
-    isAuthenticate,
+    isAuthenticated,
 }
