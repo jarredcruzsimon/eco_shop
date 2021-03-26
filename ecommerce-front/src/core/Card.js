@@ -19,7 +19,8 @@ const Card =(props)=>{
                     <ShowImage item={product} url="product"/>
 
                     {/* SHOW PRODUCT DESCRIPTION */}
-                    <p>{product.description}</p>
+                    {/* substring allows us to display a certain character length, we are limiting the length to 100 characters */}
+                    <p>{product.description.substring(0, 100)}</p>
 
                     {/* SHOW PRODUCT PRICE */}
                     <p>${product.price}</p>
