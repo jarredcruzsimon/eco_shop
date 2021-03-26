@@ -1,5 +1,6 @@
 import React from 'react'
 import Menu from './Menu.js'
+import '../styles.css'
 
 const Layout = (props) =>{
     const {title='Title', description='Description', children, className } = props
