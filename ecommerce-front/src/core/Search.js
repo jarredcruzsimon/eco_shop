@@ -68,7 +68,9 @@ const {categories, category, search, results, searched} = data
                 </h2>
                 <div className="row">
                     {results.map((product, index)=>(
-                        <Card key={index} product={product}/>
+                        <div className="col-4 mb-3">
+                            <Card key={index} product={product}/>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -8,7 +8,9 @@ const {errorHandler}= require('../helpers/dbErrorHandler.js')
 
 //middleware to get single product which can be used for CRUD
 exports.productById = (req, res, next, id)=>{
-    Product.findById(id).exec((err,product)=>{
+    Product.findById(id)
+    .populate('category')
+    .exec((err,product)=>{
         if(err || !product){
             return res.status(404).json({
                 error:"Product not found",
