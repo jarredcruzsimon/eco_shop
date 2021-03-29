@@ -5,7 +5,7 @@ import moment from 'moment'
 import { addItem } from './CartHelpers.js'
 
 const Card =(props)=>{
-    const {product, showViewProductButton = true} = props
+    const {product, showViewProductButton = true, showAddToCartButton = true} = props
 
     const [redirect, setRedirect]= useState(false)
 
@@ -33,11 +33,13 @@ const Card =(props)=>{
         }
     }
 
-    const showAddToCartButton = () =>{
-        return(
-            <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2">
-                Add to Cart
-            </button>
+    const showAddToCart = (showAddToCartButton) =>{
+        return (
+            showAddToCartButton && (
+                <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2">
+                    Add to Cart
+                </button>
+            )
         )
     }
 
@@ -84,7 +86,7 @@ const Card =(props)=>{
 
                     {showViewButton(showViewProductButton)}
                     
-                    {showAddToCartButton()}
+                    {showAddToCart(showAddToCartButton)}
 
                 </div>
 
