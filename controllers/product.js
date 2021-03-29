@@ -276,7 +276,7 @@ exports.listSearch=(req,res)=>{
     const query = {}
     //assign search value to query.name
     if(req.query.search){
-        query.name == {$regex: req.query.search, $options: 'i'}
+        query.name = {$regex: req.query.search, $options: 'i'}
         //assign category value to query.category
         if(req.query.category && req.query.category != 'All'){
             query.category = req.query.category
