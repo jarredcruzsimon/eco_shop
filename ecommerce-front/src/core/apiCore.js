@@ -1,4 +1,5 @@
 import { API } from '../config.js'
+import queryString from 'query-string'
 
 
 const getProducts = (sortBy) =>{
@@ -42,12 +43,26 @@ const getProducts = (sortBy) =>{
                 console.log(err)
             })
         )
-        }
+    }
+
+    //params is the category and search input from searchbar
+    const list = (params) =>{
+        const query = queryString.stringify(params)
+        return ( fetch(`${API}/products/search?${query}`, {
+                method: "GET"
+            })
+            .then(response=>{
+                return response.json()
+            })
+            .catch(err=>console.log(err))
+        )
+    }
 
 
     export {
         getProducts,
         getCategories,
-        getFilteredProducts
+        getFilteredProducts,
+        list
 
     }
