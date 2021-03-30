@@ -28,6 +28,55 @@ export const addItem =(item, next)=>{
     }
 }
 
+//Update item count
+export const updateItem =(productId, count)=>{
+    let cart = []
+
+    if(typeof window !== "undefined"){
+        if(localStorage.getItem('cart')){
+            cart = JSON.parse(localStorage.getItem('cart'))
+        }
+
+        cart.map((product,index)=>{
+            
+            if(product._id === productId){
+                cart[index].count = count
+            }
+            return(null)
+        })
+
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }
+
+}
+
+//Remove item
+export const removeItem =(productId)=>{
+    let cart = []
+
+    if(typeof window !== "undefined"){
+        if(localStorage.getItem('cart')){
+            cart = JSON.parse(localStorage.getItem('cart'))
+        }
+
+        cart.map((product,index)=>{
+            
+            if(product._id === productId){
+                //first arg is selecting the index, second arg is saying how many to take out
+                //index = index
+                //take out = 1
+                 cart.splice(index, 1)
+            }
+            return(null)
+        })
+
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }
+    return cart
+
+}
+
+
 //Return the number of items in the cart
 export const itemTotal =() =>{
     if(typeof window !== "undefined"){

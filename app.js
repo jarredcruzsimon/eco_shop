@@ -37,6 +37,9 @@ const categoryRoutes = require("./routes/category.js")
 //import product router
 const productRoutes = require("./routes/product.js")
 
+//import braintree router
+const braintreeRoutes = require("./routes/braintree.js")
+
 const app = express()
 
 
@@ -67,6 +70,7 @@ app.use("/api",authRoutes)
 app.use("/api",userRoutes)
 app.use("/api",categoryRoutes)
 app.use("/api",productRoutes)
+app.use("/api",braintreeRoutes)
 
 
 //---------------------------------------------------------------------

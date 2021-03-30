@@ -2,12 +2,21 @@ import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import ShowImage from './ShowImage.js'
 import moment from 'moment'
-import { addItem } from './CartHelpers.js'
+import { addItem, updateItem, removeItem } from './CartHelpers.js'
 
 const Card =(props)=>{
-    const {product, showViewProductButton = true, showAddToCartButton = true} = props
+    const {
+        product, 
+        showViewProductButton = true, 
+        showAddToCartButton = true, 
+        cartUpdate = false,
+        showRemoveProductButton = false,
+        setRun = f => f, // default value of function
+        run = undefined // default value of undefined
+    } = props
 
     const [redirect, setRedirect]= useState(false)
+    const [count, setCount]= useState(product.count)
 
     const showViewButton = (showViewProductButton) =>{
         return(
@@ -43,6 +52,20 @@ const Card =(props)=>{
         )
     }
 
+    const showRemoveButton = (showRemoveProductButton) =>{
+        return (
+            showRemoveProductButton && (
+                <button onClick={()=>{
+                    removeItem(product._id)
+                    setRun(!run); // run useEffect in parent Cart
+                }}
+                className="btn btn-outline-danger mt-2 mb-2">
+                    Remove product
+                </button>
+            )
+        )
+    }
+
     const showStock = (quantity) =>{
         return(
             quantity > 0 ? 
@@ -52,6 +75,33 @@ const Card =(props)=>{
             <span className="badge badge-primary badge-pill">
                 Out of Stock
             </span>
+        )
+    }
+
+    const handleChange =(productId) => event =>{
+        setRun(!run); // run useEffect in parent Cart
+        //check to see if the value is less than 1 and set it to one or update based on value
+        setCount(event.target.value < 1 ? 1 : event.target.value)
+        if (event.target.value >= 1){
+            updateItem(productId, event.target.value)
+        }
+    }
+
+    const showCartUpdateOptions = (cartUpdate)=>{
+        return(
+            cartUpdate && <div>
+                <div className="input-group mb-3">
+                   <div className="input-group-prepend">
+                        <span className="input-group-text">Adjust Quantity</span>
+                   </div>
+                   <input 
+                   type="number" 
+                   className="form-control" 
+                   value={count} 
+                   onChange={handleChange(product._id)}
+                   />
+                </div>
+            </div>
         )
     }
     
@@ -87,6 +137,10 @@ const Card =(props)=>{
                     {showViewButton(showViewProductButton)}
                     
                     {showAddToCart(showAddToCartButton)}
+
+                    {showCartUpdateOptions(cartUpdate)}
+
+                    {showRemoveButton(showRemoveProductButton)}
 
                 </div>
 
