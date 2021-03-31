@@ -4,7 +4,7 @@ const { requireSignin, isAuth } = require('../controllers/auth.js')
 const { userById } = require('../controllers/user.js')
 const { generateToken } = require('../controllers/braintree.js')
 
-router.get('/braintree/getToken/:useId', requireSignin, isAuth, generateToken)
+router.get('/braintree/getToken/:userId', requireSignin, isAuth, generateToken)
 
 
 router.param('userId', userById)
