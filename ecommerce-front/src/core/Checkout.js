@@ -65,21 +65,41 @@ const Checkout = (props) =>{
             )
         )
     }
+    const buy = () =>{
+        //send the nonce to your server
+        //nonce = data.instance.requestPaymentMethod()
+        let nonce
+        let getNonce = data.instance.requestPaymentMethod
+        .then(response =>{
+            console.log(response)
+            nonce = response.nonce
+            //once you have nonce, send nonce as paymentMethodNonce
+            //also total to be charged
+            console.log(`Nonce ${nonce} Total ${getTotal(products)}`)
+        })
+        .catch(error=>{
+            console.log(`Dropin error ${error}`)
+            setData({...data, error: error.message})
+        })
+
+    }
 
 
     const showDropIn =()=>{
-        <div>
-            {data.clientToken !== null && products.length > 0 ? (
-                <div>
-                    <DropIn options={{
-                        authorization: data.clientToken 
-                    }} onInstance={instance =>(data.instance = instance)} />
-                    <button className="btn btn-success">
-                        Checkout
-                    </button>
-                </div>
-            ) : null}
-        </div>
+        return(
+            <div>
+                {data.clientToken !== null && products.length > 0 ? (
+                    <div>
+                        <DropIn options={{
+                            authorization: data.clientToken 
+                        }} onInstance={instance =>(data.instance = instance)} />
+                        <button onClick={buy} className="btn btn-success">
+                            Purchase
+                        </button>
+                    </div>
+                ) : null}
+            </div>
+        )
                 }
 
     return(
