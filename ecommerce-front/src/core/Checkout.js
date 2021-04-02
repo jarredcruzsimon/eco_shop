@@ -135,7 +135,7 @@ const Checkout = (props) =>{
     return(
         <div>
             <h2>Total: ${getTotal()}</h2>
-            {showError(data.error)}
+            {isAuthenticated() && showError(data.error)}
             {showSuccess(data.success)}
             {showCheckout()}
         </div>
