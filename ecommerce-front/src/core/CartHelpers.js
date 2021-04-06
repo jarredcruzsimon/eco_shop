@@ -97,3 +97,12 @@ export const getCart =() =>{
     }
     return []
 }
+
+
+//clear cart after purchase
+export const emptyCart = next =>{
+    if(typeof window !== "undefined"){
+        localStorage.setItem('cart','[]')
+        next()
+    }
+}

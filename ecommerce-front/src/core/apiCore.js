@@ -119,6 +119,26 @@ const getProducts = (sortBy) =>{
     }
 
 
+    
+    //process order
+    const createOrder = (userId, token, createOrderData) =>{
+        return ( fetch(`${API}/order/create/${userId}`, {
+                method: "POST",
+                headers:{
+                    Accept: 'application/json',
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(createOrderData)
+            })
+            .then(response=>{
+                return response.json()
+            })
+            .catch(err=>console.log(err))
+        )
+    }
+
+
     export {
         getProducts,
         getCategories,
@@ -127,6 +147,7 @@ const getProducts = (sortBy) =>{
         read,
         listRelated,
         getBraintreeClientToken,
-        processPayment
+        processPayment,
+        createOrder
 
     }
