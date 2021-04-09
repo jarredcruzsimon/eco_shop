@@ -53,9 +53,26 @@ import { API } from '../config.js'
             })
             .catch(err=>console.log(err))
         )}
+        
+
+        const listOrders = (userId, token) =>{
+            return ( fetch(`${API}/order/list/${userId}`, {
+                    method: "GET",
+                    headers:{
+                        Accept: 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                })
+                .then(response=>{
+                    console.log(response)
+                    return response.json()
+                })
+                .catch(err=>console.log(err))
+            )}
 
     export {
         createCategory,
         createProduct,
-        getCategories
+        getCategories,
+        listOrders
     }

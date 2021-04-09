@@ -1,4 +1,4 @@
-import React, { useState, uesEffect, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../core/Layout.js'
 import { isAuthenticated } from '../auth/index.js'
 import { Link } from 'react-router-dom'

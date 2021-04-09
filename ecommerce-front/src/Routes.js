@@ -14,6 +14,7 @@ import AddProduct from './admin/AddProduct.js'
 import Shop from './core/Shop.js'
 import Product from './core/Product.js'
 import Cart from './core/Cart.js'
+import Orders from './admin/Orders.js'
 
 // PrivateRoute can only be accessed by an authenticated user
 // AdminRoute can only be used by an authenticated user who is also an admin (role === 1)
@@ -36,6 +37,7 @@ const Routes = (props) =>{
             <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
             <AdminRoute exact path="/create/category" component={AddCatergory}/>
             <AdminRoute exact path="/create/product" component={AddProduct}/>
+            <AdminRoute exact path="/admin/orders" component={Orders}/>
         </Switch>
     </BrowserRouter>
     )
