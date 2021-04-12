@@ -50,8 +50,11 @@ const app = express()
 //db connection connect takes two args
 mongoose.connect(
     process.env.DATABASE,
-    { useNewUrlParser: true,
-      useUnifiedTopology: true 
+    { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
 })
 .then(()=> console.log('DB Connected'))
 .catch((err)=>{console.log(err)})
